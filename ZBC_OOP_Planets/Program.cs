@@ -1,0 +1,243 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace ZBC_OOP_Planets
+{
+    class Program
+    {
+        static List<Planet> PlanetsList = new List<Planet>();
+
+        static void Main(string[] args)
+        {
+            FillStarterList();
+            Console.WriteLine("Initializing list...\n\r\n\r");
+
+
+            // Printing the list to console
+            PrintList(PlanetsList);
+
+            // Inserting Venus
+
+            PlanetsList.Insert(1, GetPlanet("Venus"));
+
+            Console.WriteLine("\n\rInserting Venus between Mercury and Earth\n\r");
+
+            // Printing the list to console
+            PrintList(PlanetsList);
+
+            Console.WriteLine("\n\rRemoving Pluto from list :( https://i.imgur.com/GyVbdMy.jpg");
+
+            // Find the index where a planet called Pluto resides
+            int index = PlanetsList.FindIndex(planet => planet.Name == "Pluto");
+
+            // If it's in the list, remove it
+            if(index != -1)
+            {
+                PlanetsList.RemoveAt(index);
+            }
+
+            // Printing the list to console
+            PrintList(PlanetsList);
+
+            Console.WriteLine("\n\rInserting Pluto again, yay!");
+
+            PlanetsList.Add(GetPlanet("Pluto"));
+
+            Console.WriteLine($"\n\rList count: {PlanetsList.Count}");
+
+            Console.WriteLine("\n\rCreating a new list with the planets whos mean temperature is lower than 0");
+            List<Planet> newList = PlanetsList.FindAll(planet => planet.MeanTemperature < 0);
+
+            PrintList(newList);
+
+            Console.WriteLine("\n\rCreating a new list with the planets whos diameter is higher than 10,000km and lower than 50,000km");
+            List<Planet> newList2 = PlanetsList.FindAll(planet => planet.Diameter > 10000 && planet.Diameter < 50000);
+
+            PrintList(newList2);
+
+            Console.WriteLine("\n\rNow removing ALL planets from the original list");
+
+            PlanetsList.Clear();
+
+            PrintList(PlanetsList);
+
+            Console.WriteLine("--- End of assignment");
+
+            Console.ReadKey();
+        }
+
+        /// <summary>
+        /// Prints the contents of a Planet list to console
+        /// </summary>
+        /// <param name="list"></param>
+        static void PrintList(List<Planet> list)
+        {
+            Console.WriteLine("\n\rList contents: \n\r");
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                Console.WriteLine($"{i} - {list[i].Name}");
+            }
+        }
+
+        /// <summary>
+        /// Returns an instance of a Planet with the correct data associated
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        static Planet GetPlanet(string name)
+        {
+            switch (name)
+            {
+                case "Mercury":
+                    return new Planet("Mercury",
+                                       0.330f,
+                                       4879,
+                                       5427,
+                                       3.7f,
+                                       1407.6f,
+                                       4222.6f,
+                                       57.9f,
+                                       88,
+                                       47.4f,
+                                       167,
+                                       0,
+                                       false);
+                case "Venus":
+                    return new Planet("Venus",
+                                              4.87f,
+                                              12104,
+                                              5243,
+                                              8.9f,
+                                              -5832.5f,
+                                              2802,
+                                              108.2f,
+                                              224.7f,
+                                              35,
+                                              464,
+                                              0,
+                                              false);
+                case "Earth":
+                    return new Planet("Earth",
+                                       5.97f,
+                                       12756,
+                                       5514,
+                                       9.8f,
+                                       23.9f,
+                                       24,
+                                       149.6f,
+                                       365.2f,
+                                       29.8f,
+                                       15,
+                                       1,
+                                       false);
+
+                case "Mars":
+                    return new Planet("Mars",
+                                       0.642f,
+                                       6792,
+                                       3933,
+                                       3.7f,
+                                       24.6f,
+                                       24.7f,
+                                       227.9f,
+                                       687,
+                                       24.1f,
+                                       -65,
+                                       2,
+                                       false);
+                case "Jupiter":
+                    return new Planet("Jupiter",
+                                       1898,
+                                       142984,
+                                       1326,
+                                       23.1f,
+                                       9.9f,
+                                       9.9f,
+                                       778.6f,
+                                       4331,
+                                       13.1f,
+                                       -110,
+                                       67,
+                                       true);
+
+                case "Saturn":
+                    return new Planet("Saturn",
+                                       586,
+                                       120536,
+                                       687,
+                                       9.0f,
+                                       10.7f,
+                                       10.7f,
+                                       1433.5f,
+                                       10747,
+                                       9.7f,
+                                       -140,
+                                       62,
+                                       true);
+
+                case "Uranus":
+                    return new Planet("Uranus",
+                                        86.8f,
+                                        51118,
+                                        1271,
+                                        8.7f,
+                                        -17.2f,
+                                        17.2f,
+                                        2872.5f,
+                                        30589,
+                                        6.8f,
+                                        -195,
+                                        27,
+                                        true);
+                case "Neptune":
+                    return new Planet("Neptune",
+                                       102,
+                                       49528,
+                                       1638,
+                                       11,
+                                       16.1f,
+                                       16.1f,
+                                       4495.1f,
+                                       60000,
+                                       5.4f,
+                                       -200,
+                                       14,
+                                       true);
+
+                case "Pluto":
+                    return new Planet("Pluto",
+                                       0.0146f,
+                                       2370,
+                                       2095,
+                                       0.7f,
+                                       -153.3f,
+                                       153.3f,
+                                       5906.4f,
+                                       90056,
+                                       4.7f,
+                                       -225,
+                                       5,
+                                       false);
+
+                default:
+                    return null;
+
+
+            }
+        }
+
+
+        static void FillStarterList()
+        {
+            PlanetsList.Add(GetPlanet("Mercury"));
+            PlanetsList.Add(GetPlanet("Earth"));
+            PlanetsList.Add(GetPlanet("Mars"));
+            PlanetsList.Add(GetPlanet("Jupiter"));
+            PlanetsList.Add(GetPlanet("Saturn"));
+            PlanetsList.Add(GetPlanet("Uranus"));
+            PlanetsList.Add(GetPlanet("Neptune"));
+            PlanetsList.Add(GetPlanet("Pluto"));
+        }
+    }
+}
