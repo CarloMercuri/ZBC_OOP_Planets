@@ -57,7 +57,7 @@ namespace ZBC_OOP_Planets
             Console.WriteLine("\n\rCreating a new list with the planets whos mean temperature is lower than 0");
            
 
-            PrintList(control.GetFreezingPlanets());
+            PrintList(control.GetFreezingPlanets(0));
 
             AskToContinue();
 
